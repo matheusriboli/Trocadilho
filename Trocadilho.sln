@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trocadilho.UI", "UI\ChangeMachine.UI\Trocadilho.UI.csproj", "{33804D7C-31BB-4EC3-A93F-B96C2B41A6CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trocadilho.Core", "Domain\ChangeMachine.Core\Trocadilho.Core.csproj", "{A2911B23-5E33-4272-981F-71E563EBE92F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{69041FE7-D8C3-4423-81CB-15DB23C16535}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{64C6D7D8-0FA4-451B-B07A-289F0C48AD8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trocadilho.Core.Test", "Domain\ChangeMachine.Core.Test\Trocadilho.Core.Test.csproj", "{5577E3DB-D1D3-4B66-BE40-F66E0ECF23D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33804D7C-31BB-4EC3-A93F-B96C2B41A6CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33804D7C-31BB-4EC3-A93F-B96C2B41A6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33804D7C-31BB-4EC3-A93F-B96C2B41A6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33804D7C-31BB-4EC3-A93F-B96C2B41A6CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2911B23-5E33-4272-981F-71E563EBE92F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2911B23-5E33-4272-981F-71E563EBE92F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2911B23-5E33-4272-981F-71E563EBE92F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2911B23-5E33-4272-981F-71E563EBE92F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5577E3DB-D1D3-4B66-BE40-F66E0ECF23D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5577E3DB-D1D3-4B66-BE40-F66E0ECF23D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5577E3DB-D1D3-4B66-BE40-F66E0ECF23D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5577E3DB-D1D3-4B66-BE40-F66E0ECF23D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{33804D7C-31BB-4EC3-A93F-B96C2B41A6CA} = {64C6D7D8-0FA4-451B-B07A-289F0C48AD8D}
+		{A2911B23-5E33-4272-981F-71E563EBE92F} = {69041FE7-D8C3-4423-81CB-15DB23C16535}
+		{5577E3DB-D1D3-4B66-BE40-F66E0ECF23D7} = {69041FE7-D8C3-4423-81CB-15DB23C16535}
+	EndGlobalSection
+EndGlobal

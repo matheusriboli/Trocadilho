@@ -12,12 +12,12 @@ namespace ChangeMachine.Core.Test {
             var request = new CalculateChangeRequest();
 
             request.PaidValue = 0;
-            request.DueValue = 0;
+            request.ProductValue = 0;
 
             ChangeMachineManager changeMachineManager = new ChangeMachineManager();
             var response = changeMachineManager.CalculateChange(request);
 
-            Assert.IsTrue(response.FlagError);
+            Assert.IsFalse(response.Success);
         }
 
         [TestMethod]
@@ -27,12 +27,12 @@ namespace ChangeMachine.Core.Test {
             var request = new CalculateChangeRequest();
 
             request.PaidValue = 100;
-            request.DueValue = 100;
+            request.ProductValue = 100;
 
             ChangeMachineManager changeMachineManager = new ChangeMachineManager();
             var response = changeMachineManager.CalculateChange(request);
 
-            Assert.IsFalse(response.FlagError);
+            Assert.IsTrue(response.Success);
             Assert.AreEqual(0, response.CoinDict.Count);
         }
 
@@ -43,29 +43,29 @@ namespace ChangeMachine.Core.Test {
             var request = new CalculateChangeRequest();
 
             request.PaidValue = 200;
-            request.DueValue = 100;
+            request.ProductValue = 100;
 
             ChangeMachineManager changeMachineManager = new ChangeMachineManager();
             var response = changeMachineManager.CalculateChange(request);
 
-            Assert.IsFalse(response.FlagError);
+            Assert.IsTrue(response.Success);
             Assert.AreEqual(1, response.CoinDict.Count);
             Assert.AreEqual(1, response.CoinDict[Entities.CoinEnum.OneReal]);
         }
 
         [TestMethod]
-        public void divZero() {
+        public void SingleCoin() {
 
 
             var request = new CalculateChangeRequest();
 
             request.PaidValue = 150;
-            request.DueValue = 100;
+            request.ProductValue = 100;
 
             ChangeMachineManager changeMachineManager = new ChangeMachineManager();
             var response = changeMachineManager.CalculateChange(request);
 
-            Assert.IsFalse(response.FlagError);
+            Assert.IsTrue(response.Success);
             Assert.AreEqual(1, response.CoinDict.Count);
             Assert.AreEqual(1, response.CoinDict[Entities.CoinEnum.FiftyCents]);
         }
@@ -77,12 +77,12 @@ namespace ChangeMachine.Core.Test {
             var request = new CalculateChangeRequest();
 
             request.PaidValue = 78598;
-            request.DueValue = 100;
+            request.ProductValue = 100;
 
             ChangeMachineManager changeMachineManager = new ChangeMachineManager();
             var response = changeMachineManager.CalculateChange(request);
 
-            Assert.IsFalse(response.FlagError);
+            Assert.IsTrue(response.Success);
             Assert.AreEqual(784, response.CoinDict[Entities.CoinEnum.OneReal]);
             Assert.AreEqual(1, response.CoinDict[Entities.CoinEnum.FiftyCents]);
             Assert.AreEqual(1, response.CoinDict[Entities.CoinEnum.TwentyFiveCents]);

@@ -32,6 +32,17 @@
             Execute = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
+            // Execute
+            // 
+            Execute.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            Execute.Location = new System.Drawing.Point(26, 245);
+            Execute.Name = "Execute";
+            Execute.Size = new System.Drawing.Size(200, 43);
+            Execute.TabIndex = 6;
+            Execute.Text = "Trocar dilho";
+            Execute.UseVisualStyleBackColor = true;
+            Execute.Click += new System.EventHandler(this.Execute_Click);
+            // 
             // txtDueValue
             // 
             this.txtDueValue.Font = new System.Drawing.Font("Comic Sans MS", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -49,17 +60,6 @@
             this.label1.Size = new System.Drawing.Size(91, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "Valor do Produto";
-            // 
-            // Execute
-            // 
-            Execute.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            Execute.Location = new System.Drawing.Point(26, 245);
-            Execute.Name = "Execute";
-            Execute.Size = new System.Drawing.Size(200, 43);
-            Execute.TabIndex = 6;
-            Execute.Text = "Trocar dilho";
-            Execute.UseVisualStyleBackColor = true;
-            Execute.Click += new System.EventHandler(this.Execute_Click);
             // 
             // label2
             // 
@@ -105,6 +105,7 @@
             this.Font = new System.Drawing.Font("Comic Sans MS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Form1";
             this.Text = "Trocadilho";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

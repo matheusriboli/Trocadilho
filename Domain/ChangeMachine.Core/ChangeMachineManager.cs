@@ -10,32 +10,49 @@ namespace ChangeMachine.Core {
     public class ChangeMachineManager {
 
         public CalculateChangeResponse CalculateChange(CalculateChangeRequest request) {
-
-
-            if (request.PaidValue == 0 || request.DueValue == 0)
-                return new CalculateChangeResponse("Valor informado invalido");
-
-            int valuesDifference = request.PaidValue - request.DueValue;
-
-            if (valuesDifference == 0)
-                return new CalculateChangeResponse();
-
-            CalculateChangeResponse response = new CalculateChangeResponse();
-            Dictionary<CoinEnum, int> coinDict = new Dictionary<CoinEnum, int>();
-
-            foreach (var coin in this.GenerateCoinsDesc()) {
-                int coinQtt = valuesDifference / (int)coin;
-                valuesDifference = valuesDifference % (int)coin;
-                if(coinQtt != 0) 
-                    coinDict.Add(coin, coinQtt);
-
-                if (valuesDifference == 0) {
-                    break;
+            // TODO logar request
+            try {
+                request.Validate();
+                if (!request.ValuesAreValid) {
+                    return new CalculateChangeResponse() {
+                        OperationReport = request.OperationReport,
+                        Success = false
+                    };
                 }
-            }
-            response.CoinDict = coinDict;
+                int valuesDifference = request.PaidValue - request.ProductValue;
 
-            return response;
+                if (valuesDifference == 0)
+                    return new CalculateChangeResponse() {
+                        Success = true
+                    };
+
+                CalculateChangeResponse response = new CalculateChangeResponse();
+                Dictionary<CoinEnum, int> coinDict = new Dictionary<CoinEnum, int>();
+
+                foreach (var coin in this.GenerateCoinsDesc()) {
+                    int coinQtt = valuesDifference / (int)coin;
+                    valuesDifference = valuesDifference % (int)coin;
+                    if (coinQtt != 0)
+                        coinDict.Add(coin, coinQtt);
+
+                    if (valuesDifference == 0) {
+                        break;
+                    }
+                }
+                response.CoinDict = coinDict;
+                response.Success = true;
+                // TODO logar a resposta
+                return response;                
+            }
+            catch (Exception e) {
+                // TODO logar exception
+                var response =new CalculateChangeResponse() {
+                    Success = false
+                };
+                response.OperationReport.Messages.Add(e.Message);
+                return response;
+            }
+            
         }
 
 

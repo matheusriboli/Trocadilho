@@ -30,7 +30,7 @@ namespace ChangeMachine.UI {
             var changeMachineManager = new ChangeMachineManager();
 
             var request = new CalculateChangeRequest() {
-                DueValue = int.Parse(txtDueValue.Text),
+                ProductValue = int.Parse(txtDueValue.Text),
                 PaidValue = int.Parse(txtPaidValue.Text)
             };
 
@@ -38,17 +38,27 @@ namespace ChangeMachine.UI {
 
             var changeMessage = new System.Text.StringBuilder();
 
-            if (!response.FlagError) {
+            if (response.Success) {
                 foreach (var coin in response.CoinDict) {
                     var textCoin = $"{coin.Value }  de {coin.Key.ToString()} ";
                     changeMessage.AppendLine(textCoin);
                 }
+                if (response.CoinDict.Count == 0) {
+                    changeMessage.AppendLine("Não há troco!");
+                }
             }
-            else
-                changeMessage.Append(response.MessageErrorReturn);
+            else {
+                foreach (var message in response.OperationReport.Messages) {
+                    changeMessage.AppendLine(message);
+                }
+            }
 
 
             this.lblChange.Text = changeMessage.ToString();
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+
         }
     }
 }

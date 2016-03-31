@@ -9,20 +9,14 @@ namespace ChangeMachine.Core.DataContracts {
     public class CalculateChangeResponse {
 
 
-        public CalculateChangeResponse() {
-            this.FlagError = false;
+        public CalculateChangeResponse() {         
             this.CoinDict = new Dictionary<CoinEnum, int>();
+            this.OperationReport = new OperationReport();
         }
-
-        public CalculateChangeResponse(string messageErrorReturn) {
-            this.MessageErrorReturn = messageErrorReturn;
-            this.FlagError = true;
-        }
-
 
         public Dictionary<CoinEnum, int> CoinDict { get; set; }
-        public string MessageErrorReturn { get; set; }
-        public bool FlagError { get; set; }
+        public OperationReport OperationReport { get; set; }
+        public bool Success { get; set; }
 
     }
 }
