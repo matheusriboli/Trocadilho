@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ChangeMachine.Core.DataContracts;
 using ChangeMachine.Core.Entities;
+using ChangeMachine.Core.Factories;
+using ChangeMachine.Core.Processors;
 
 namespace ChangeMachine.Core {
     public class ChangeMachineManager {
@@ -25,21 +27,17 @@ namespace ChangeMachine.Core {
                     return new CalculateChangeResponse() {
                         Success = true
                     };
-
+                Dictionary<IProcessor, CashType> processorsDict = ProcessorFactory.GetProcessors();
+                Tuple<int, Dictionary<string, int>> result;
                 CalculateChangeResponse response = new CalculateChangeResponse();
-                Dictionary<CoinEnum, int> coinDict = new Dictionary<CoinEnum, int>();
-
-                foreach (var coin in this.GenerateCoinsDesc()) {
-                    int coinQtt = valuesDifference / (int)coin;
-                    valuesDifference = valuesDifference % (int)coin;
-                    if (coinQtt != 0)
-                        coinDict.Add(coin, coinQtt);
-
+                foreach (var processor  in processorsDict) {
+                    result = processor.Key.CalculateChange(valuesDifference, processor.Value);
+                    valuesDifference = result.Item1;
+                    response.CashDict = response.CashDict.Union(result.Item2).ToDictionary(k => k.Key, v => v.Value);
                     if (valuesDifference == 0) {
                         break;
                     }
                 }
-                response.CoinDict = coinDict;
                 response.Success = true;
                 // TODO logar a resposta
                 return response;                
@@ -53,20 +51,6 @@ namespace ChangeMachine.Core {
                 return response;
             }
             
-        }
-
-
-        private List<CoinEnum> GenerateCoinsDesc() {
-            var coins = new List<CoinEnum>() {
-                CoinEnum.OneReal,
-                CoinEnum.FiftyCents,
-                CoinEnum.TwentyFiveCents,
-                CoinEnum.TenCents,
-                CoinEnum.FiveCents,
-                CoinEnum.OneCent
-            };
-
-            return coins;
         }
 
     }

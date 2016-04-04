@@ -39,11 +39,11 @@ namespace ChangeMachine.UI {
             var changeMessage = new System.Text.StringBuilder();
 
             if (response.Success) {
-                foreach (var coin in response.CoinDict) {
-                    var textCoin = $"{coin.Value }  de {coin.Key.ToString()} ";
+                foreach (var coin in response.CashDict) {
+                    var textCoin = $"{coin.Value }  de {coin.Key} ";
                     changeMessage.AppendLine(textCoin);
                 }
-                if (response.CoinDict.Count == 0) {
+                if (response.CashDict.Count == 0) {
                     changeMessage.AppendLine("Não há troco!");
                 }
             }

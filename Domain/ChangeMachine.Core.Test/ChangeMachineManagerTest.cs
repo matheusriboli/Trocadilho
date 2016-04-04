@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using ChangeMachine.Core.DataContracts;
+using ChangeMachine.Core.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ChangeMachine.Core.Test {
@@ -33,7 +35,7 @@ namespace ChangeMachine.Core.Test {
             var response = changeMachineManager.CalculateChange(request);
 
             Assert.IsTrue(response.Success);
-            Assert.AreEqual(0, response.CoinDict.Count);
+            Assert.AreEqual(0, response.CashDict.Count);
         }
 
         [TestMethod]
@@ -49,8 +51,8 @@ namespace ChangeMachine.Core.Test {
             var response = changeMachineManager.CalculateChange(request);
 
             Assert.IsTrue(response.Success);
-            Assert.AreEqual(1, response.CoinDict.Count);
-            Assert.AreEqual(1, response.CoinDict[Entities.CoinEnum.OneReal]);
+            Assert.AreEqual(1, response.CashDict.Count);
+            Assert.AreEqual(1, response.CashDict["1"]);
         }
 
         [TestMethod]
@@ -66,8 +68,8 @@ namespace ChangeMachine.Core.Test {
             var response = changeMachineManager.CalculateChange(request);
 
             Assert.IsTrue(response.Success);
-            Assert.AreEqual(1, response.CoinDict.Count);
-            Assert.AreEqual(1, response.CoinDict[Entities.CoinEnum.FiftyCents]);
+            Assert.AreEqual(1, response.CashDict.Count);
+            Assert.AreEqual(1, response.CashDict["50 Cents"]); //[Entities.CoinEnum.FiftyCents]);
         }
 
         [TestMethod]
@@ -81,13 +83,17 @@ namespace ChangeMachine.Core.Test {
 
             ChangeMachineManager changeMachineManager = new ChangeMachineManager();
             var response = changeMachineManager.CalculateChange(request);
-
+            
             Assert.IsTrue(response.Success);
-            Assert.AreEqual(784, response.CoinDict[Entities.CoinEnum.OneReal]);
-            Assert.AreEqual(1, response.CoinDict[Entities.CoinEnum.FiftyCents]);
-            Assert.AreEqual(1, response.CoinDict[Entities.CoinEnum.TwentyFiveCents]);
-            Assert.AreEqual(2, response.CoinDict[Entities.CoinEnum.TenCents]);
-            Assert.AreEqual(3, response.CoinDict[Entities.CoinEnum.OneCent]);
+            Assert.AreEqual(1, response.CashDict["500 Silver Bar"]);
+            Assert.AreEqual(1, response.CashDict["250 Silver Bar"]);
+            Assert.AreEqual(1, response.CashDict["20 Bill"]);
+            Assert.AreEqual(1, response.CashDict["10 Bill"]);
+            Assert.AreEqual(2, response.CashDict["2 Bill"]);
+            Assert.AreEqual(1, response.CashDict["50 Cents"]);
+            Assert.AreEqual(1, response.CashDict["25 Cents"]);
+            Assert.AreEqual(2, response.CashDict["10 Cents"]);
+            Assert.AreEqual(1, response.CashDict["3 Cents Candy"]);
         }
 
 

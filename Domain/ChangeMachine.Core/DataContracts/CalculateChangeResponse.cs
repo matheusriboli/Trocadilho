@@ -10,11 +10,11 @@ namespace ChangeMachine.Core.DataContracts {
 
 
         public CalculateChangeResponse() {         
-            this.CoinDict = new Dictionary<CoinEnum, int>();
+            this.CashDict = new Dictionary<string, int>();
             this.OperationReport = new OperationReport();
         }
 
-        public Dictionary<CoinEnum, int> CoinDict { get; set; }
+        public Dictionary<string, int> CashDict { get; set; }
         public OperationReport OperationReport { get; set; }
         public bool Success { get; set; }
 

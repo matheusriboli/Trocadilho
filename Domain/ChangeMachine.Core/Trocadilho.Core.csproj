@@ -40,16 +40,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\CashItem.cs" />
+    <Compile Include="Entities\CashType.cs" />
+    <Compile Include="Factories\BillCashTypeFactory.cs" />
+    <Compile Include="Factories\CandyCashTypeFactory.cs" />
+    <Compile Include="Factories\CoinCashTypeFactory.cs" />
+    <Compile Include="Factories\ProcessorFactory.cs" />
+    <Compile Include="Factories\SilverBarCashTypeFactory.cs" />
+    <Compile Include="Processors\BaseProcessor.cs" />
     <Compile Include="ChangeMachineManager.cs" />
     <Compile Include="DataContracts\CalculateChangeRequest.cs" />
     <Compile Include="DataContracts\CalculateChangeResponse.cs" />
     <Compile Include="DataContracts\OperationReport.cs" />
-    <Compile Include="Entities\CoinEnum.cs" />
+    <Compile Include="Processors\BasicChangeProcessor.cs" />
+    <Compile Include="Processors\IProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\CategoryEnum.cs" />
+    <Compile Include="Utilities\Logger.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource1.resx" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
