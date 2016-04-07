@@ -10,8 +10,10 @@ namespace ChangeMachine.Core.Utilities {
 
         static ConfigurationReader thisObj;
         public string LogFile { get; }
+        public string LogType { get; }
         private ConfigurationReader() {
            this.LogFile = ConfigurationManager.AppSettings["LogFilePath"];
+           this.LogType = ConfigurationManager.AppSettings["LogType"];
         }
 
         public static ConfigurationReader GetInstance() {

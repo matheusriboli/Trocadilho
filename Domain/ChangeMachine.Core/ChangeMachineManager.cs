@@ -13,11 +13,10 @@ namespace ChangeMachine.Core {
     public class ChangeMachineManager {
 
         public CalculateChangeResponse CalculateChange(CalculateChangeRequest request) {
-            Logger log = Logger.GetInstance();
+            ILogger log = LoggerFactory.GetLogger();
             log.LogInfo(CategoryEnum.Request, request);
             CalculateChangeResponse response;
             try {
-                request.Validate();
                 if (!request.ValuesAreValid) {
                     response = new CalculateChangeResponse() {
                         OperationReport = request.OperationReport,

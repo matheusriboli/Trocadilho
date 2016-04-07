@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using System.IO;
 
 namespace ChangeMachine.Core.Utilities {
-    class Logger {
-        static Logger thisObj;
-        private Logger() { }
-        public static Logger GetInstance() {
-            if (Logger.thisObj == null) {
-                Logger.thisObj = new Logger();
+    class FileLogger : ILogger {
+        static FileLogger thisObj;
+        private FileLogger() { }
+        public static FileLogger GetInstance() {
+            if (FileLogger.thisObj == null) {
+                FileLogger.thisObj = new FileLogger();
             }
-            return Logger.thisObj;
+            return FileLogger.thisObj;
         }
 
         public void LogException(Exception exception) {

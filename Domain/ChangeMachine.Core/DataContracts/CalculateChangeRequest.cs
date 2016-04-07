@@ -9,26 +9,29 @@ namespace ChangeMachine.Core.DataContracts {
 
         public int ProductValue { get; set; }
         public int PaidValue { get; set; }
-        public bool ValuesAreValid { get; set; }
+        public bool ValuesAreValid { get {
+                return Validate();
+            } }
         public OperationReport OperationReport { get; set; }
 
-        public void Validate() 
+        public bool Validate() 
         {
-            this.ValuesAreValid = true;
+            bool IsValid = true;
             this.OperationReport = new OperationReport();
             if (this.PaidValue <= 0) 
             {
-                this.ValuesAreValid = false;
+                IsValid = false;
                 this.OperationReport.Messages.Add("Valor pago é inválido.");
             }
             if (this.ProductValue <= 0) {
-                this.ValuesAreValid = false;
+                IsValid = false;
                 this.OperationReport.Messages.Add("Valor da compra é inválido.");
             }
             if (this.PaidValue < this.ProductValue) {
-                this.ValuesAreValid = false;
+                IsValid = false;
                 this.OperationReport.Messages.Add("Valor pago insuficiente.");
             }
+            return IsValid;
         }
     }
 }

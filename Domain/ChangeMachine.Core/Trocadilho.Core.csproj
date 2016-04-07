@@ -50,6 +50,7 @@
     <Compile Include="Factories\BillCashTypeFactory.cs" />
     <Compile Include="Factories\CandyCashTypeFactory.cs" />
     <Compile Include="Factories\CoinCashTypeFactory.cs" />
+    <Compile Include="Factories\LoggerFactory.cs" />
     <Compile Include="Factories\ProcessorFactory.cs" />
     <Compile Include="Factories\SilverBarCashTypeFactory.cs" />
     <Compile Include="Processors\BaseProcessor.cs" />
@@ -62,7 +63,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\CategoryEnum.cs" />
     <Compile Include="Utilities\ConfigurationReader.cs" />
-    <Compile Include="Utilities\Logger.cs" />
+    <Compile Include="Utilities\EventViewerLogger.cs" />
+    <Compile Include="Utilities\ILogger.cs" />
+    <Compile Include="Utilities\FileLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource1.resx" />
