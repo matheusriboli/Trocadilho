@@ -9,7 +9,6 @@ namespace ChangeMachine.Core.Utilities {
 
         Response,
         Request,
-        Exception
 
     }
 }
