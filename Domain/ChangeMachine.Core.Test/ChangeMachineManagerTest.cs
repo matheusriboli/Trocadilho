@@ -1,12 +1,26 @@
 ﻿using System;
 using System.Linq;
 using ChangeMachine.Core.DataContracts;
+using ChangeMachine.Core.Utilities;
 using ChangeMachine.Core.Entities;
+using Dlp.Framework.Container;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ChangeMachine.Core.Processors;
+using System.Collections.Generic;
 
 namespace ChangeMachine.Core.Test {
     [TestClass]
     public class ChangeMachineManagerTest {
+
+        [TestInitialize]
+        public void Initialize() {
+            IocFactory.Reset();
+            IocFactory.Register(
+                Component.For<ILogger>().ImplementedBy<StubLogger>("Event_viewer"),
+                Component.For<ILogger>().ImplementedBy<StubLogger>("Log_file")
+                );
+        }
+
         [TestMethod]
         public void CalcChangeFromZeroCents() {
 
@@ -20,6 +34,7 @@ namespace ChangeMachine.Core.Test {
             var response = changeMachineManager.CalculateChange(request);
 
             Assert.IsFalse(response.Success);
+            Assert.AreEqual(System.Net.HttpStatusCode.BadRequest, response.OperationReport.StatusCode);
         }
 
         [TestMethod]
@@ -75,6 +90,7 @@ namespace ChangeMachine.Core.Test {
         [TestMethod]
         public void CalculateChangeDifficult() {
 
+            
 
             var request = new CalculateChangeRequest();
 
@@ -96,6 +112,33 @@ namespace ChangeMachine.Core.Test {
             Assert.AreEqual(1, response.CashDict["3 Cents Candy"]);
         }
 
+        [TestMethod]
+        public void TestProcessorFail() {
+            IocFactory.Register(
+                Component.For<IProcessor>().ImplementedBy<StubProcessor>()
+                );
+            var request = new CalculateChangeRequest();
 
+            request.PaidValue = 78598;
+            request.ProductValue = 13;
+
+            ChangeMachineManager changeMachineManager = new ChangeMachineManager();
+            CalculateChangeResponse response = changeMachineManager.CalculateChange(request);
+            Assert.IsFalse(response.Success);
+            Assert.IsNotNull(response.OperationReport.Messages);
+            Assert.IsTrue(response.OperationReport.Messages.Any());
+            Assert.IsNotNull(response.OperationReport.Messages.First());
+            Assert.AreEqual(System.Net.HttpStatusCode.InternalServerError, response.OperationReport.StatusCode);
+
+
+        }
+
+
+        [TestMethod]
+        public void ValidaRequestTest() {
+            //PrivateObject privateObject = new PrivateObject(typeof(CalculateChangeRequest));
+            PrivateObject privateObject = new PrivateObject(new CalculateChangeRequest());
+            privateObject.Invoke("Validate");
+        }
     }
 }

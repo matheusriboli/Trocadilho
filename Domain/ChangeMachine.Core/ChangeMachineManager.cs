@@ -8,9 +8,18 @@ using ChangeMachine.Core.Entities;
 using ChangeMachine.Core.Factories;
 using ChangeMachine.Core.Processors;
 using ChangeMachine.Core.Utilities;
+using Dlp.Framework.Container;
 
 namespace ChangeMachine.Core {
     public class ChangeMachineManager {
+
+        public ChangeMachineManager() {
+            IocFactory.Register(
+                Component.For<ILogger>().ImplementedBy<EventViewerLogger>("Event_viewer").IsSingleton(),
+                Component.For<ILogger>().ImplementedBy<FileLogger>("Log_file").IsSingleton(),
+                Component.For<IProcessor>().ImplementedBy<BasicChangeProcessor>()
+                );
+        }
 
         public CalculateChangeResponse CalculateChange(CalculateChangeRequest request) {
             ILogger log = LoggerFactory.GetLogger();
@@ -22,6 +31,7 @@ namespace ChangeMachine.Core {
                         OperationReport = request.OperationReport,
                         Success = false
                     };
+                    response.OperationReport.StatusCode = System.Net.HttpStatusCode.BadRequest;
                     log.LogInfo(CategoryEnum.Response, response);
                     return response;
                 }
@@ -31,6 +41,7 @@ namespace ChangeMachine.Core {
                     response = new CalculateChangeResponse() {
                         Success = true
                     };
+                    response.OperationReport.StatusCode = System.Net.HttpStatusCode.OK;
                     log.LogInfo(CategoryEnum.Response, response);
                     return response;
                 }                 
@@ -46,6 +57,7 @@ namespace ChangeMachine.Core {
                     }
                 }
                 response.Success = true;
+                response.OperationReport.StatusCode = System.Net.HttpStatusCode.OK;
             }
             catch (Exception e) {
                 log.LogException(e);
@@ -53,6 +65,7 @@ namespace ChangeMachine.Core {
                     Success = false
                 };
                 response.OperationReport.Messages.Add(e.Message);
+                response.OperationReport.StatusCode = System.Net.HttpStatusCode.InternalServerError;
             }
             log.LogInfo(CategoryEnum.Response, response);
             return response;            

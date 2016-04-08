@@ -14,7 +14,7 @@ namespace ChangeMachine.Core.DataContracts {
             } }
         public OperationReport OperationReport { get; set; }
 
-        public bool Validate() 
+        private bool Validate() 
         {
             bool IsValid = true;
             this.OperationReport = new OperationReport();

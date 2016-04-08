@@ -10,13 +10,7 @@ namespace ChangeMachine.Core.Utilities {
     class EventViewerLogger : ILogger {
         static EventViewerLogger thisObj;
         const string SOURCE = "Trocadilho";
-        private EventViewerLogger() { }
-        public static EventViewerLogger GetInstance() {
-            if (EventViewerLogger.thisObj == null) {
-                EventViewerLogger.thisObj = new EventViewerLogger();
-            }
-            return EventViewerLogger.thisObj;
-        }
+        public EventViewerLogger() { }
         public void LogDebug(CategoryEnum category, object obj) {
             this.WriteMessage($"[DEBUG][{category}]: {JsonConvert.SerializeObject(obj)}", EventLogEntryType.Information);
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ChangeMachine.Core.Utilities;
+using Dlp.Framework.Container;
 
 namespace ChangeMachine.Core.Factories {
     class LoggerFactory {
@@ -11,9 +12,9 @@ namespace ChangeMachine.Core.Factories {
         public static ILogger GetLogger() {
             ConfigurationReader configReader = ConfigurationReader.GetInstance();
             if (configReader.LogType == "File") {
-                return FileLogger.GetInstance();
+                return IocFactory.ResolveByName<ILogger>("Log_file");
             }
-            return EventViewerLogger.GetInstance();
+            return IocFactory.ResolveByName<ILogger>("Event_viewer");
         }
 
         }

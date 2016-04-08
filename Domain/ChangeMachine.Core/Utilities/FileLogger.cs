@@ -9,13 +9,7 @@ using System.IO;
 namespace ChangeMachine.Core.Utilities {
     class FileLogger : ILogger {
         static FileLogger thisObj;
-        private FileLogger() { }
-        public static FileLogger GetInstance() {
-            if (FileLogger.thisObj == null) {
-                FileLogger.thisObj = new FileLogger();
-            }
-            return FileLogger.thisObj;
-        }
+        public FileLogger() { }
 
         public void LogException(Exception exception) {
             this.WriteMessage($"[EXCEPTION]: {exception.ToString()}");
@@ -37,17 +31,6 @@ namespace ChangeMachine.Core.Utilities {
                 }
             }
             catch (Exception) { }
-
-            //StreamWriter writer = null;
-            //try {
-            //    writer = File.CreateText(configReader.GetConfigLogFileName());
-            //    writer.Write("...");
-            //    writer.Close ()
-            //}
-            //catch {
-            //    if (writer != null) { writer.Close(); }
-            //    throw;
-            //}
         }
     }
 }

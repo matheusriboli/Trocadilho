@@ -35,7 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dlp.Framework, Version=0.1.5941.30672, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dlp.Framework.dll.0.9.3\lib\net45\Dlp.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Extensions" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -52,14 +58,19 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="StubLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ChangeMachineManagerTest.cs" />
+    <Compile Include="StubProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChangeMachine.Core\Trocadilho.Core.csproj">
       <Project>{a2911b23-5e33-4272-981f-71e563ebe92f}</Project>
       <Name>Trocadilho.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ChangeMachine.Core.Utilities {
-    enum CategoryEnum {
+    public enum CategoryEnum {
 
         Response,
         Request,
